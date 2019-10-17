@@ -137,16 +137,32 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Fruit.cpp" />
+    <ClCompile Include="Snake.cpp" />
+    <ClCompile Include="SensorFood.cpp" />
+    <ClCompile Include="SensorBorder.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Records.txt" />
+    <Text Include="Step.txt" />
+    <Text Include="WB.txt" />
     <Text Include="weights.txt" />
+    <Text Include="WF.txt" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\Pictures\Snake\Fruit.png" />
     <Image Include="..\..\..\..\Pictures\Snake\SnakeBody.png" />
     <Image Include="..\..\..\..\Pictures\Snake\SnakeHeader.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="Global.h" />
+    <ClInclude Include="SensorFood.h" />
+    <ClInclude Include="SensorBorder.h" />
+    <ClInclude Include="Snake.h" />
+    <ClInclude Include="Fruit.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
