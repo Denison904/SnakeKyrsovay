@@ -13,23 +13,7 @@ void Snake::MoveTail() {
 }
 
 int Snake::mind() {
-	int up, down, left, right;
-	int sensorF[9][9][4], sensorB[9][9][4];
-	for (int i = 0; i < 9; i++)
-	{
-		for (int j = 0; j < 9; j++)
-		{
-			if (i!=5&&j!=5)
-			{
-				for (int k = 0; k < 4; k++)
-				{
-					sensorB[i][j][k] = SensorBorder::get(i, j);
-					sensorF[i][j][k] = SensorFood::get(i, j);
-				}
-			}
-		}
-	}
-	
+	return 0;
 }
 
 Snake::Snake() {

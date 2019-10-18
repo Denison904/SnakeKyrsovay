@@ -1,11 +1,36 @@
 #include "Global.h"
 #include "Game.h"
 #include <ctime>
+#include <random>
+#include <conio.h>
+Game::Game() {
+	fruit.set();
+	cin >> A;
+}
+
+void Game::Input() {
+
+	switch (A)
+	{
+	case 'H' || 'h': this->InputH(); break;
+	case 'A':this->InputAI(); break;
+	case'a':this->InputAI(); break;
+	case 'N' :this->InputN(); break;
+	default:
+		cout << "\nError you enter false kay!\n";
+		setAlive();
+		exit(1);
+		break;
+	}
+}
+
+void Game::InputN() {
+}
 
 bool Game::Check(int x, int y) {
-	for (int i = 0; i < Snake::getBody(); i++)
+	for (int i = 0; i < snake.getBody(); i++)
 	{
-		if (Snake::getTailX(i) == x && Snake::getTailY(i) == y) return true;
+		if (snake.getTailX(i) == x && snake.getTailY(i) == y) return true;
 	}
 	return false;
 
@@ -25,7 +50,7 @@ void Game::Draw() {
 				{
 					cout << "#";
 				}
-				else if (i == Snake::getY() && j == Snake::getX())
+				else if (i == snake.getY() && j == snake.getX())
 				{
 					cout << "@";
 				}
@@ -33,7 +58,7 @@ void Game::Draw() {
 				{
 					cout << "o";
 				}
-				else  if (i == Fruit::getY() && j == Fruit::getX()) {
+				else  if (i == fruit.getY() && j == fruit.getX()) {
 					cout << "F";
 				}
 				else cout << " ";
@@ -41,64 +66,67 @@ void Game::Draw() {
 			cout << '\n';
 		}
 	}
-	cout << endl << Snake::getCourse();
+	cout << endl << snake.getCourse();
 	setIteration();
 
 }
-
-
-void Game::Input() {
-	/*char a;
+void Game::InputH() {
+	char a;
 	a = _getche();
 	switch (a)
 	{
-	case 'a': if (Snake::getCourse() != 2) Snake::setCourse(0); break;
-	case 'w': if (Snake::getCourse() != 3) Snake::setCourse(1); break;
-	case 'd': if (Snake::getCourse() != 0) Snake::setCourse(2); break;
-	case 's': if (Snake::getCourse() != 1) Snake::setCourse(3); break;
-	}*/
+	case 'a': if (snake.getCourse() != 2) snake.setCourse(0); break;
+	case 'w': if (snake.getCourse() != 3) snake.setCourse(1); break;
+	case 'd': if (snake.getCourse() != 0) snake.setCourse(2); break;
+	case 's': if (snake.getCourse() != 1) snake.setCourse(3); break;
+	}
+}
+
+void Game::InputAI() {
+
 	int a;
-	srand(static_cast<unsigned int>(time(0)));
-	a = rand() % 3;
+	random_device rd;
+	mt19937 mersenne(rd());
+	a = mersenne() % 3;
 	switch (a)
 	{
-	case 0: if (Snake::getCourse() != 2) Snake::setCourse(0); break;
-	case 1: if (Snake::getCourse() != 3) Snake::setCourse(1); break;
-	case 2: if (Snake::getCourse() != 0) Snake::setCourse(2); break;
-	case 3: if (Snake::getCourse() != 1) Snake::setCourse(3); break;
+	case 0: if (snake.getCourse() != 2) snake.setCourse(0); break;
+	case 1: if (snake.getCourse() != 3) snake.setCourse(1); break;
+	case 2: if (snake.getCourse() != 0) snake.setCourse(2); break;
+	case 3: if (snake.getCourse() != 1) snake.setCourse(3); break;
 	}
 }
 
 
 void Game::Logic() {
-	if (Snake::getX() == Fruit::getX() && Snake::getY() == Fruit::getY()) {
+	if (snake.getX() == fruit.getX() && snake.getY() == fruit.getY()) {
 		int x, y;
 
-		x = Snake::getTailX(Snake::getBody() - 1);
-		y = Snake::getTailY(Snake::getBody() - 1);
-		Snake::MoveTail();
-		Snake::setTail(x, y);
-		Snake::setBody();
+		x = snake.getTailX(snake.getBody() - 1);
+		y = snake.getTailY(snake.getBody() - 1);
+		snake.MoveTail();
+		snake.setTail(x, y);
+		snake.setBody();
 		setSource();
-		Fruit::set();
+		fruit.set();
 	}
-	else MoveTail();
-	switch (Snake::getCourse())
+	else snake.MoveTail();
+	switch (snake.getCourse())
 	{
-	case 0: Snake::setX(-1); break;
-	case 1: Snake::setY(-1); break;
-	case 2: Snake::setX(1); break;
-	case 3: Snake::setY(1); break;
+	case 0: snake.setX(-1); break;
+	case 1: snake.setY(-1); break;
+	case 2: snake.setX(1); break;
+	case 3: snake.setY(1); break;
 	}
 
-	if (Snake::getX() == 0 || Snake::getX() == width - 1 || Snake::getY() == 0 || Snake::getY() == high - 1) {
+	if (snake.getX() == 0 || snake.getX() == width - 1 || snake.getY() == 0 || snake.getY() == high - 1) {
 		setAlive();
 		system("cls");
 		cout << "GAME OVER 1!\nSOURSE = " << getSource() << "\nIteration = " << iteration << endl;
 		exit(0);
 
 	}
-	else if (Check(Snake::getX(), Snake::getY()))
+	else if (Check(snake.getX(), snake.getY()))
 	{
 		setAlive();
 		system("cls");
@@ -109,3 +137,4 @@ void Game::Logic() {
 
 
 }
+

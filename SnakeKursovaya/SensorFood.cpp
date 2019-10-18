@@ -1,40 +1,24 @@
 #include "Global.h"
 #include "SensorFood.h"
-#include <ctime>
+
 using namespace std;
 
-void SensorFood::set() {
-	fstream w;
 
-	w.open("WF.txt");
-	w.seekg(0, w.end);
-	size_t fileSize = w.tellg();
-	if (fileSize == 0) {
-		srand(static_cast<unsigned int>(time(0)));
-		for (int i = 0; i < 9; i++)
+void SensorFood::set() {
+	int x, y, k = 0;
+	x = this->getX() - 4;
+	y = this->getY() - 4;
+	for (int i = 0; i < this->getBody(); i++)
+	{
+		for (int j = 0; j < this->getBody(); j++)
 		{
-			for (int j = 0; j < 9; j++)
+			if (i != 5 && j != 5)
 			{
-				if (i != 5 && j != 5)
-					for (int k = 0; k < 4; k++)
-					{
-						sensor[i][j] = rand() % 10 - 5;
-						w << sensor[i][j] << " ";
-					}
+			//	if (x+i==Fruit::getX() &&y+i==Fruit::getY()) input[k] = 1;
+			//	else input[k] = 0;
+			//	k++;
 			}
-		}
-	}
-	else {
-		for (int i = 0; i < 9; i++)
-		{
-			for (int j = 0; j < 9; j++)
-			{
-				if (i != 5 && j != 5)
-					for (int k = 0; k < 4; k++)
-					{
-						w >> sensor[i][j];
-					}
-			}
+
 		}
 	}
 }

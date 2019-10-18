@@ -1,9 +1,10 @@
 #pragma once
+#include "Snake.h"
 
-class SensorFood {
+class SensorFood:public Snake {
 public:
 	void set();
-	int get(int i,int j) { return sensor[i][j]; }
+	int get(int i) { return input[i]; }
 private:
-	int sensor[9][9];
+	int input[80];
 };

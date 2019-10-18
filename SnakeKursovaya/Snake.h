@@ -1,11 +1,9 @@
 #pragma once
-#include "SensorBorder.h"
-#include "SensorFood.h"
 #include <vector>
 
 using namespace std;
 
-class Snake:SensorBorder,SensorFood {
+class Snake{
 public:
 	int mind();
 	int getCourse() { return course; }

@@ -5,10 +5,10 @@
 
 
 int main() {
-
+	cout << "Enter h(human) or a(artificial intelligence): ";
 	Game game;
-	game.Fruit::set();
 	game.Draw();
+	
 	while (game.getAlive()) {
 		game.Input();
 		game.Logic();

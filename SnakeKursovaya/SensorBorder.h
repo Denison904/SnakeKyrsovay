@@ -1,9 +1,11 @@
 #pragma once
+#include "Snake.h"
 
-class SensorBorder {
+class SensorBorder:public Snake {
 public:
 	void set();
-	int get(int i, int j) { return sensor[i][j]; }
+	bool check(int x, int y);
+	int get(int i) { return input[i]; }
 private:
-	int sensor[9][9];
+	int input[80];
 };

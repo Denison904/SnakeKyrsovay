@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Файлы ресурсов\img">
+      <UniqueIdentifier>{26e3cc05-a92f-43a4-a991-6492c2d637e6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -52,14 +55,14 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\Pictures\Snake\SnakeBody.png">
-      <Filter>Файлы ресурсов</Filter>
+    <Image Include="..\..\..\..\Pictures\Snake\Fruit.png">
+      <Filter>Файлы ресурсов\img</Filter>
     </Image>
     <Image Include="..\..\..\..\Pictures\Snake\SnakeHeader.png">
-      <Filter>Файлы ресурсов</Filter>
+      <Filter>Файлы ресурсов\img</Filter>
     </Image>
-    <Image Include="..\..\..\..\Pictures\Snake\Fruit.png">
-      <Filter>Файлы ресурсов</Filter>
+    <Image Include="..\..\..\..\Pictures\Snake\SnakeBody.png">
+      <Filter>Файлы ресурсов\img</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
