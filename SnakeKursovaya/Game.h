@@ -1,7 +1,7 @@
 #pragma once
 #include "Snake.h"
 #include "Fruit.h"
-
+#include "Neuron.h"
 
 class Game {
 public:
@@ -10,6 +10,7 @@ public:
 	void InputH();
 	void InputAI();
 	void InputN();
+//	void toStudy();
 	void Logic();
 	void Draw();
 	void setAlive() { alive = false; }
@@ -25,8 +26,25 @@ public:
 private:
 	Fruit fruit;
 	Snake snake;
-	char A;
+	//NetWork nn;
 	bool alive = true;
 	int source = 0, speed = 1;
 	int iteration = 0;
+	char A, Study;
+
+	/*
+	const int input_l = 160;
+	const int l = 4;
+	
+
+	double input[160];
+	double result;
+	int rresult;
+	double ra = 0;
+	int maxra = 0;
+	int maxraepoch = 0;
+	int size[4] = { input_l, 64,32,4 };
+	int n = 10;
+	double time = 0;
+	Data* data = new Data[n];*/
 };

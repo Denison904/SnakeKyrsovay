@@ -2,12 +2,13 @@
 
 #include <string>
 using namespace std;
-struct date {
+struct Data {
 	double info[160];
 	int rresult;
 };
 
 class Neuron {
+public:
 	double value;
 	double error;
 	void act();	
@@ -28,9 +29,11 @@ public:
 	void setRandomInput();
 	void setInput(double p[]);
 	void show();
-	void LayersCleaner(int LayerNumber, int start, int stop);
-	void ForwardFeeder(int LayerNumber, int start, int stop);
+	void WeightUpdate(int Start, int Stop, int LayerNum, int lr);
+	void ErrorCounter(int LayerNamber, int Start, int Stop, double prediction, double rresult, double lr);
+	void LayersCleaner(int LayerNumber, int Start, int Stop);
+	void ForwardFeeder(int LayerNumber, int Start, int Stop);
 	double ForwardFeed();
-	double ForwardFeed(string program);
 	bool SaveWeights();
+	void BackPropogation(double pridiction, double rresult, double lr);
 };

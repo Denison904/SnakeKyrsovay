@@ -7,5 +7,5 @@ public:
 	bool check(int x, int y);
 	int get(int i) { return input[i]; }
 private:
-	int input[80];
+	int input[80*4];
 };

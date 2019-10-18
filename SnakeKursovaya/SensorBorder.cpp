@@ -15,6 +15,9 @@ bool SensorBorder::check(int x, int y) {
 
 void SensorBorder::set() {
 	int x, y, k = 0;
+	ofstream fout;
+	fout.open("Bridge.txt");
+	fout.clear();
 	x = this->getX()-4;
 	y = this->getY()-4;
 	for (int  i = 0; i < this->getBody(); i++)
@@ -23,11 +26,15 @@ void SensorBorder::set() {
 		{
 			if (i!=5&&j!=5)
 			{
-				if (check(x+i, y+j)) input[k] = 1;
-				else input[k] = 0;
-				k++;
+				for (int a = 0; a < 4; a++) {
+					if (check(x+i, y+j)) input[k] = 1;
+					else input[k] = 0;
+					fout << input[k++] << " ";
+				}
+				
 			}
 			
 		}
 	}
+	fout.close();
 }

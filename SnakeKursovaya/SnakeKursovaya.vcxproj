@@ -140,6 +140,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Fruit.cpp" />
+    <ClCompile Include="Neuron.cpp" />
     <ClCompile Include="Snake.cpp" />
     <ClCompile Include="SensorFood.cpp" />
     <ClCompile Include="SensorBorder.cpp" />
@@ -147,6 +148,8 @@
   <ItemGroup>
     <Text Include="Records.txt" />
     <Text Include="Step.txt" />
+    <Text Include="Bridge.txt" />
+    <Text Include="log.txt" />
     <Text Include="WB.txt" />
     <Text Include="weights.txt" />
     <Text Include="WF.txt" />
@@ -159,10 +162,14 @@
   <ItemGroup>
     <ClInclude Include="Game.h" />
     <ClInclude Include="Global.h" />
+    <ClInclude Include="Neuron.h" />
     <ClInclude Include="SensorFood.h" />
     <ClInclude Include="SensorBorder.h" />
     <ClInclude Include="Snake.h" />
     <ClInclude Include="Fruit.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Fruit.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

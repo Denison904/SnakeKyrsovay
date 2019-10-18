@@ -36,6 +36,9 @@
     <ClCompile Include="SensorBorder.cpp">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
+    <ClCompile Include="Neuron.cpp">
+      <Filter>Файлы ресурсов</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="weights.txt">
@@ -51,6 +54,12 @@
       <Filter>Файлы ресурсов</Filter>
     </Text>
     <Text Include="Step.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+    <Text Include="Bridge.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+    <Text Include="log.txt">
       <Filter>Файлы ресурсов</Filter>
     </Text>
   </ItemGroup>
@@ -84,5 +93,13 @@
     <ClInclude Include="Global.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="Neuron.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Fruit.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </None>
   </ItemGroup>
 </Project>
