@@ -1,6 +1,7 @@
 #include "Global.h"
 #include "Snake.h"
 
+
 void Snake::MoveTail() {
 	for (int i = getBody()-1;i>0 ; i--)
 	{
@@ -12,10 +13,6 @@ void Snake::MoveTail() {
 
 }
 
-int Snake::mind() {
-	
-	return 0;
-}
 
 Snake::Snake() {
 	body = 3;
@@ -26,3 +23,7 @@ Snake::Snake() {
 		setTail(x + i + 1, y);
 	}
 }
+
+
+
+

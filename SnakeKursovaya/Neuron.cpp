@@ -1,218 +1,156 @@
 #include "Neuron.h"
-#include "SensorBorder.h"
-#include "SensorFood.h"
 #include "Global.h"
 #include <ctime>
 #include <random>
 
-void Neuron::act() {
-	value = 1 / (1 + exp(-value));
-}
 
-bool NetWork::SaveWeights() {
-	fstream fout;
-	fout.open("weights.txt");
-	for (int i = 0; i < Layers; i++)
+double NetWork::DSigm(double x) {
+	if (fabs(x-1)<1e-9||fabs(x)<1e-9)
 	{
-		if (i < Layers - 1) {
-			for (int j = 0; j < size[i]; j++)
-			{
-				for (int k = 0; k < size[i+1]; k++)
-				{
-					fout << weights[i][j][k]<<" ";
-				}
-			}
-		}
+		return 0.0;
 	}
-	fout.close();
-	return 1;
-}
-
-
-double NetWork::sigm_pro(double x) {
-	if (fabs(x - 1) < 1e-9 || fabs(x) < 1e-9) return 0;
-	double res = x * (1.0 - x);
-	return res;
+	return x * (1.0 - x);
 }
 
 double NetWork::predict(double x) {
-	if (x = 0.9) return 1;
+	if (x > 0.8) return 1;
 	else return 0;
 }
 
-void NetWork::setLayersNotStudy(int n, int* p, string filename) {
-	ifstream fin;
-	fin.open(filename);
+void NetWork::setLayers(int n, vector<int> p) {
 	srand(time(0));
-	neurons = new Neuron * [n];
+	Layers = n;
+	neuron = new Neuron * [n];
 	weights = new double** [n - 1];
 	size = new int[n];
-	for (int  i = 0; i < n; i++)
+	for (int i = 0; i < n; i++)
 	{
 		size[i] = p[i];
-		neurons[i] = new Neuron[p[i]];
-		if (i<n-1)
-		{
+		neuron[i] = new Neuron[p[i]];
+		if (i < n - 1) {
 			weights[i] = new double* [p[i]];
-			for (int j = 0; j < p[i]; j++)
+			for (int  j = 0; j < p[i]; j++)
 			{
 				weights[i][j] = new double[p[i + 1]];
 				for (int k = 0; k < p[i+1]; k++)
 				{
-					fin >> weights[i][j][k];
-				}
-			}
-		}
-	}
-}
-
-void NetWork::setLayers(int n, int* p) {
-	srand(time(0));
-	Layers = n;
-	neurons = new Neuron * [n];
-	weights = new double** [n - 1];
-	size = new int[n];
-	for (int  i = 0; i < n; i++)
-	{
-		size[i] = p[i];
-		neurons[i] = new Neuron[p[i]];
-		if (i < n - 1) {
-			weights[i] = new double* [p[i]];
-			for (int j = 0; j < p[i]; j++)
-			{
-				weights[i][j] = new double[p[i + 1]];
-				for (int  k = 0; k < p[i+1]; k++)
-				{
 					weights[i][j][k] = (rand() % 100) * 0.01 / size[i];
 				}
 			}
-			
 		}
 	}
-
 }
 
-void NetWork::setRandomInput() {
+void NetWork::setInput(vector<double> p) {
 	for (int i = 0; i < size[0]; i++)
 	{
-		neurons[0][i].value = rand() % 100 * 0.01;
+		neuron[0][i].value = p[i];
 	}
 }
 
-void NetWork::setInput(double p[]) {
-	for (int  i = 0; i < size[0]; i++)
+void NetWork::ForwardFeeder(int layerNumber, int start, int stop) {
+	for (int j = start; j < stop; j++)
 	{
-		neurons[0][i].value = p[i];
-	}
-}
-
-void NetWork::LayersCleaner(int LayerNumber, int Start, int Stop) {
-	srand(time(0));
-	for (int i = Start; i < Stop; i++) {
-		neurons[LayerNumber][i].value = 0;
-	}
-}
-
-void NetWork::ForwardFeeder(int LayerNumber, int Start, int Stop) {
-	for (int j = 0; j < Stop; j++)
-	{
-		for (int k = 0; k < size[LayerNumber-1]; k++)
+		for (int  k = 0; k < size[layerNumber-1]; k++)
 		{
-			neurons[LayerNumber][j].value += neurons[LayerNumber - 1][k].value * weights[LayerNumber][k][j];
+			neuron[layerNumber][j].value += neuron[layerNumber][k].value * weights[layerNumber - 1][k][j];
 		}
-		neurons[LayerNumber][j].act();
+	}
+}
+
+void NetWork::LayersCleaner(int layerNumber, int start, int stop) {
+	for (int i = start; i < stop; i++)
+	{
+		neuron[layerNumber][i].value = 0;
 	}
 }
 
 double NetWork::ForwardFeed() {
-	setlocale(LC_ALL, "ru");
-	for (int i = 1; i < Layers; i++)
+	for (int i = 0; i < Layers; i++)
 	{
-		NetWork::LayersCleaner(i, 0, int(floor(size[i] / 2)));
-		NetWork::ForwardFeeder(i, 0, size[i]);
+		LayersCleaner(i, 0, size[i]);
 	}
 	double max = 0;
 	double prediction = 0;
-	for (int i = 0; i < size[Layers-1]; i++)
+	for (int  i = 0; i < size[Layers-1]; i++)
 	{
-	//	cout << char(i + 65) << " : " << neurons[Layers - 1][i].value << endl;
-		if (neurons[Layers - 1][i].value > max) {
-			max = neurons[Layers - 1][i].value;
-			prediction = i;
+		if (neuron[Layers - 1][i].value > max)
+		{
+			max = neuron[Layers - 1][i].value;
+			prediction = 1;
 		}
 	}
 	return prediction;
 }
 
-void NetWork::ErrorCounter(int LayerNumber, int Start, int Stop, double prediction, double rresult, double lr) {
-	if (LayerNumber == Layers - 1) {
-		for (int  j = Start; j < Stop; j++)
+void NetWork::Error(int layerNumber, int start, int stop, double prediction, double rresult, double lr) {
+	if (layerNumber==Layers-1)
+	{
+		for (int j = start; j < stop; j++)
 		{
-			if (j != int(rresult)) {
-				neurons[LayerNumber][j].error = -pow(neurons[LayerNumber][j].value, 2);
+			if (j!= int(rresult))
+			{
+				neuron[layerNumber][j].error = -pow(neuron[layerNumber][j].value, 2);
 			}
 			else
 			{
-				neurons[LayerNumber][j].error = pow(1.0 - neurons[LayerNumber][j].value, 2);
+				neuron[layerNumber][j].error = 1.0 - neuron[layerNumber][j].value;
 			}
 		}
 	}
 	else
 	{
-		for (int j = Start; j < Stop; j++)
+		for (int j = start; j < stop; j++)
 		{
 			double error = 0.0;
-			for (int k = 0; k < size[LayerNumber + 1]; k++) {
-				error += neurons[LayerNumber + 1][k].error * weights[LayerNumber][j][k];
+			for (int k = 0; k < size[layerNumber]; k++)
+			{
+				error += neuron[layerNumber + 1][k].value * weights[layerNumber][j][k];
 			}
-			neurons[LayerNumber][j].error = error;
+			neuron[layerNumber][j].error = error;
 		}
+		
 	}
 }
 
-void NetWork::WeightUpdate(int Start, int Stop, int LayerNum, int lr) {
-	int i = LayerNum;
-	for (int  j = Start	; j < Stop; j++)
+void NetWork::WeightUpdate(int start, int stop, int layerNumber, int lr) {
+	int i = layerNumber;
+	for (int j = start; j < stop; j++)
 	{
 		for (int  k = 0; k < size[i+1]; k++)
 		{
-			weights[i][j][k] += lr * neurons[i + 1][k].error * sigm_pro(neurons[i + 1][k].value * neurons[i][j].value);
+			weights[i][j][k] += lr * neuron[i + 1][k].error * DSigm(neuron[i + 1][k].value) * neuron[i][j].error;
 		}
 	}
 }
 
 void NetWork::BackPropogation(double prediction, double rresult, double lr) {
-	for (int i = Layers-1; i >0; i--)
-	{
-		if (i == Layers - 1) {
-			for (int j = 0; j < size[i]; j++) {
-				if (j != int(rresult)) {
-					neurons[i][j].error = -pow((neurons[i][j].value), 2);
-				}
-				else {
-					neurons[i][j].error = pow(1.0 - neurons[i][j].value, 2);
-				}
-
-			}
-		}
-		else {
-			for (int j = 0; j < size[i]; j++) {
-				double error = 0.0;
-				for (int k = 0; k < size[i + 1]; k++) {
-					error += neurons[i + 1][k].error * weights[i][j][k];
-				}
-				neurons[i][j].error = error;
-			}
-		}
-	}
-	for (int i = 0; i < Layers-1; i++)
-	{
-		for (int j = 0; j < size[i]; j++)
+	for (int i = Layers - 1; i > 0; i--) {
+		if (i == Layers-1)
 		{
-			for (int k = 0; k < size[i+1]; k++)
+			for (int j = 0; j < size[i]; j++)
 			{
-				weights[i][j][k] += lr * neurons[i + 1][k].error * sigm_pro(neurons[i + 1][k].value) * neurons[i][j].value;
+				if (j != int(rresult)) {
+					neuron[i][j].error = -pow(neuron[i][j].value, 2);
+				}
+				else
+				{
+					neuron[i][j].error = 1.0 - neuron[i][j].value;
+				}
+			}
+		}
+		else
+		{
+			for (int j = 0; j < size[i]; j++)
+			{
+				double error = 0.0;
+				for (int  k = 0; k < size[i+1]; k++)
+				{
+					error += neuron[i + 1][k].error * weights[i][j][k];
+				}
+				neuron[i][j].error = error;
 			}
 		}
 	}
+	
 }

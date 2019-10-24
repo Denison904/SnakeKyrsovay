@@ -1,1 +1,19 @@
-﻿  SnakeKursovaya.vcxproj -> C:\Users\Denis\source\repos\SnakeKursovaya\Debug\SnakeKursovaya.exe
+﻿  main.cpp
+  Game.cpp
+  Neuron.cpp
+C:\Users\Denis\source\repos\SnakeKursovaya\SnakeKursovaya\Game.cpp(3,10): fatal error C1083: Не удается открыть файл включение: SensorBorder.h: No such file or directory,
+  Snake.cpp
+  Sensor.cpp
+C:\Users\Denis\source\repos\SnakeKursovaya\SnakeKursovaya\Neuron.cpp(2,10): fatal error C1083: Не удается открыть файл включение: SensorBorder.h: No such file or directory,
+C:\Users\Denis\source\repos\SnakeKursovaya\SnakeKursovaya\Sensor.cpp(5,25): error C2653: SensorBorder: не является именем класса или пространства имен
+C:\Users\Denis\source\repos\SnakeKursovaya\SnakeKursovaya\Sensor.cpp(8,23): error C2355: "this": может указываться только в нестатических членах-функциях или инициализаторах нестатических членов данных
+C:\Users\Denis\source\repos\SnakeKursovaya\SnakeKursovaya\Sensor.cpp(10,7): error C2355: "this": может указываться только в нестатических членах-функциях или инициализаторах нестатических членов данных
+C:\Users\Denis\source\repos\SnakeKursovaya\SnakeKursovaya\Sensor.cpp(16,23): error C2653: SensorBorder: не является именем класса или пространства имен
+C:\Users\Denis\source\repos\SnakeKursovaya\SnakeKursovaya\Sensor.cpp(21,6): error C2355: "this": может указываться только в нестатических членах-функциях или инициализаторах нестатических членов данных
+C:\Users\Denis\source\repos\SnakeKursovaya\SnakeKursovaya\Sensor.cpp(22,6): error C2355: "this": может указываться только в нестатических членах-функциях или инициализаторах нестатических членов данных
+C:\Users\Denis\source\repos\SnakeKursovaya\SnakeKursovaya\Sensor.cpp(23,23): error C2355: "this": может указываться только в нестатических членах-функциях или инициализаторах нестатических членов данных
+C:\Users\Denis\source\repos\SnakeKursovaya\SnakeKursovaya\Sensor.cpp(25,23): error C2355: "this": может указываться только в нестатических членах-функциях или инициализаторах нестатических членов данных
+C:\Users\Denis\source\repos\SnakeKursovaya\SnakeKursovaya\Sensor.cpp(30,27): error C2065: input: необъявленный идентификатор
+C:\Users\Denis\source\repos\SnakeKursovaya\SnakeKursovaya\Sensor.cpp(31,11): error C2065: input: необъявленный идентификатор
+  Создание кода...
+C:\Users\Denis\source\repos\SnakeKursovaya\SnakeKursovaya\Sensor.cpp(32,14): error C2065: input: необъявленный идентификатор

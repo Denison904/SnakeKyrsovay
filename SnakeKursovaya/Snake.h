@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include "Sensor.h"
 
 using namespace std;
 
@@ -19,8 +20,14 @@ public:
 	void MoveTail();
 	void setTail(int x, int y) { TailX.push_back(x); TailY.push_back(y); }
 	Snake();
+	Sensor sensor;
+	void search();
+	bool Border(int x0, int y0);
+	
+	bool checkTail(int x0, int y0);
 private:
 	int body, x , y , course ;	
+
 	vector<int> TailX;
 	vector<int> TailY;
 };

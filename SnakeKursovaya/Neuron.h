@@ -1,39 +1,31 @@
 #pragma once
+#include <vector>
 
-#include <string>
 using namespace std;
-struct Data {
-	double info[160];
-	int rresult;
-};
 
-class Neuron {
-public:
+struct Neuron
+{
 	double value;
 	double error;
-	void act();	
+	void act() {
+		value = 1 / (1+exp(-value));
+	}
 };
-
 
 class NetWork {
 public:
 	int Layers;
-	Neuron** neurons;
+	Neuron** neuron;
 	double*** weights;
-	int *size;
-	int threadsNum = 1;
-	double sigm_pro(double x);
+	int* size;
+	double DSigm(double x);
 	double predict(double x);
-	void setLayersNotStudy(int n, int* p, string filename);
-	void setLayers(int n, int* p);
-	void setRandomInput();
-	void setInput(double p[]);
-	void show();
-	void WeightUpdate(int Start, int Stop, int LayerNum, int lr);
-	void ErrorCounter(int LayerNamber, int Start, int Stop, double prediction, double rresult, double lr);
-	void LayersCleaner(int LayerNumber, int Start, int Stop);
-	void ForwardFeeder(int LayerNumber, int Start, int Stop);
+	void setLayers(int n, vector<int> p);
+	void setInput(vector<double> p);
+	void LayersCleaner(int layerNumber, int start, int stop);
+	void ForwardFeeder(int layerNumber, int start, int stop);
 	double ForwardFeed();
-	bool SaveWeights();
-	void BackPropogation(double pridiction, double rresult, double lr);
+	void Error(int layerNumber, int start, int stop, double prediction, double rresult, double lr);
+	void WeightUpdate(int start, int stop, int layerNumber, int lr);
+	void BackPropogation(double prediction, double rresult, double lr);
 };

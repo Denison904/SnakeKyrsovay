@@ -30,33 +30,15 @@
     <ClCompile Include="Snake.cpp">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
-    <ClCompile Include="SensorFood.cpp">
-      <Filter>Файлы ресурсов</Filter>
-    </ClCompile>
-    <ClCompile Include="SensorBorder.cpp">
-      <Filter>Файлы ресурсов</Filter>
-    </ClCompile>
     <ClCompile Include="Neuron.cpp">
+      <Filter>Файлы ресурсов</Filter>
+    </ClCompile>
+    <ClCompile Include="Sensor.cpp">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="weights.txt">
-      <Filter>Файлы ресурсов</Filter>
-    </Text>
-    <Text Include="Records.txt">
-      <Filter>Файлы ресурсов</Filter>
-    </Text>
-    <Text Include="WF.txt">
-      <Filter>Файлы ресурсов</Filter>
-    </Text>
-    <Text Include="WB.txt">
-      <Filter>Файлы ресурсов</Filter>
-    </Text>
-    <Text Include="Step.txt">
-      <Filter>Файлы ресурсов</Filter>
-    </Text>
-    <Text Include="Bridge.txt">
       <Filter>Файлы ресурсов</Filter>
     </Text>
     <Text Include="log.txt">
@@ -84,22 +66,14 @@
     <ClInclude Include="Fruit.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="SensorFood.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="SensorBorder.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="Global.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Neuron.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Fruit.txt">
-      <Filter>Файлы ресурсов</Filter>
-    </None>
+    <ClInclude Include="Sensor.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

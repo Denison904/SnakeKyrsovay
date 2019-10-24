@@ -1,7 +1,6 @@
 #include "Global.h"
 #include "Game.h"
-#include "SensorBorder.h"
-#include "SensorFood.h"
+#include "Sensor.h"
 #include <ctime>
 #include <random>
 #include <conio.h>
@@ -16,6 +15,10 @@ Game::Game() {
 	}
 	fruit.set();
 	fruit.set();
+}
+
+void Game::Sensor() {
+	
 }
 
 void Game::Input() {
@@ -35,76 +38,55 @@ void Game::Input() {
 		break;
 	}
 }
-/*
+
+void Snake::search() {
+}
+
 void Game::toStudy() {
-
-	ifstream fin;
-	ofstream fout;
-	fin.open("Bridge.txt");
-	fout.open("log.txt");
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < input_l; j++) {
-			fin >> data[i].info[j];
-		}
-		fin >> data[i].rresult;
-		data[i].rresult -= 65;
-	}
-
-	nn.setLayers(l, size);
-	for (int e = 0; ra / n * 100 < 100; e++) {
-		//cout << "Epoch #" << e << endl;
-		fout << "Epoch # " << e << endl;
-		double epoch_start = clock();
-		ra = 0;
-		double w_delta = 0;
+	
 
 
-
-		for (int i = 0; i < n; i++) {
-
-			for (int j = 0; j < 160; j++) {
-				input[j] = data[i].info[j];
+}
+void Game::search() {
+	int x0 = snake.getX() - 4, y0 = snake.getY() - 4, k = 0;
+	for (int i = 0; i < 9; i++)
+	{
+		for (int j = 0; j < 9; j++)
+		{
+			if (i != 5 && j != 5)
+			{
+				if (Border(x0, y0))
+					snake.sensor.input[k++] = -1;
+				else if (checkFruit(x0, y0))
+					snake.sensor.input[k++] = 1;
+				else snake.sensor.input[k++] = 0;
 			}
-			rresult =data[i].rresult;
-			//cout << int(rresult) << endl;
-			//cout << "Цифра " << rresult << endl;
-			nn.setInput(input);
-			double FF_start = clock();
-
-			this->result = nn.ForwardFeed();
-
-			double FF_stop = clock();
-			//cout << "ForwardFeed Time: " << FF_stop - FF_start << endl;
-			//nn.show();
-			if (result == rresult) {
-				//cout << "Результат верный!\n";
-				cout << "Угадал ход " << "\t\t\t****\n" << endl;
-				ra++;
-			}
-			else {
-				//cout << "Результат " << result << " неверный!\n";
-				//cout << "Не угадал букву " << char(rresult + 65) << "\n";
-				double BP_start = clock();
-				nn.BackPropogation(result, rresult, 0.5);
-				double BP_stop = clock();
-				//cout << "BackPropogation time: " << BP_stop - BP_start << endl;
-			}
-		}
-
-		double epoch_stop = clock();
-		cout << "Right answers: " << ra / n * 100 << "% \t Max RA: " << double(maxra) / n * 100 << "(epoch " << maxraepoch << " )" << endl;
-		time = 0;
-		//cout << "W_Delta: " << w_delta << endl;
-		if (ra > maxra) {
-			maxra = ra;
-			maxraepoch = e;
-		}
-		if (maxraepoch < e - 250) {
-			maxra = 0;
 		}
 	}
 }
-*/
+
+bool Game::checkTail(int x0, int y0) {
+	for (int i = 0; i < snake.getBody(); i++)
+	{
+		if (x0 == snake.getTailX(i) && y0 == snake.getTailY(i))
+			return true;
+	}
+	return false;
+}
+
+bool Game::Border(int x0, int y0) {
+	if (x0 <= 0 || y0 <= 0 || x0 >= width - 1 || y0 >= high - 1)
+		return true;
+	else if (checkTail(x0, y0))
+		return true;
+	else return false;
+}
+
+bool Game::checkFruit(int x0, int y0) {
+	if (fruit.getX() == x0 && fruit.getY() == y0)
+		return true;
+	else return false;
+}
 
 
 void Game::InputN() {
@@ -152,7 +134,6 @@ void Game::Draw() {
 	}
 	cout << endl << snake.getCourse();
 	setIteration();
-
 }
 void Game::InputH() {
 	char a;
@@ -167,7 +148,6 @@ void Game::InputH() {
 }
 
 void Game::InputAI() {
-
 	int a;
 	random_device rd;
 	mt19937 mersenne(rd());
@@ -185,7 +165,6 @@ void Game::InputAI() {
 void Game::Logic() {
 	if (snake.getX() == fruit.getX() && snake.getY() == fruit.getY()) {
 		int x, y;
-
 		x = snake.getTailX(snake.getBody() - 1);
 		y = snake.getTailY(snake.getBody() - 1);
 		snake.MoveTail();
