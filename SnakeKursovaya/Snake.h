@@ -6,7 +6,6 @@ using namespace std;
 
 class Snake{
 public:
-	int mind();
 	int getCourse() { return course; }
 	int getX() { return x; }
 	int getY() { return y; }
@@ -14,6 +13,7 @@ public:
 	void setX(int t) { x += t; }
 	void setY(int t) { y += t; }
 	void setBody() {  body++; }
+	void SetCourse(int x) { course = x; };
 	void setCourse(int x) { course = x; };
 	int getTailX(int i) { return TailX[i]; }
 	int getTailY(int i) { return TailY[i]; }
@@ -21,12 +21,9 @@ public:
 	void setTail(int x, int y) { TailX.push_back(x); TailY.push_back(y); }
 	Snake();
 	Sensor sensor;
-	void search();
-	bool Border(int x0, int y0);
-	
-	bool checkTail(int x0, int y0);
+
 private:
-	int body, x , y , course ;	
+	int body, x, y, course;
 
 	vector<int> TailX;
 	vector<int> TailY;

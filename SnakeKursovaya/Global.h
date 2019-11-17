@@ -6,4 +6,3 @@
 const int width = 40;
 const int high = 20;
 
-	

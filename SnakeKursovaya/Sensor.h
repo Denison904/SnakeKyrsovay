@@ -1,5 +1,5 @@
 #pragma once
 class Sensor {
 public:
-	int input[80];
+	int input[11*11*2];
 };

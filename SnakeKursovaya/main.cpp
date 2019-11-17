@@ -1,22 +1,25 @@
 // Version 0.1.0;
-#include "Global.h"
-#include "Game.h"
+#include "Neuron.h"
+#include "GANeuron.h"
+#include <iostream>
 
-
-
-int main() {
-	while (true)
+void main() {
+	int iter;
+	cout << "Enter how many snake stady:\n";
+	cin >> iter;
+	NetWork nw;
+	while (iter>0)
 	{
-		Game game;
-			game.Draw();
-	
-			while (game.getAlive()) {
-				game.Input();
-				game.Logic();
-				game.Draw();
-			}
+		
+		
+		nw.game.Draw();
+
+		while (nw.game.getAlive()) {
+			nw.game.Input();
+			nw.game.Logic();
+			nw.game.Draw();
+		}
+		iter--;
 	}
 	
-
-	return 0;
 }
